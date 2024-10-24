@@ -12,9 +12,8 @@ public class MeterUploadServices(
     IRepository<Account> accountRepository)
     : IUploadServices<MeterReadingRecord>
 {
-    /// <inheritdoc>
-    ///     <cref>IUploadsServices.Upload(Stream)</cref>
-    /// </inheritdoc>
+
+    /// <inheritdoc cref="IUploadServices{T}.Upload"/>
     public async Task<CsvParsingResults<MeterReadingRecord>> Upload(Stream fileStream)
     {
         var records = csvServices.Read<MeterReadingRecord, MeterReadingMapping>(fileStream);
@@ -34,6 +33,13 @@ public class MeterUploadServices(
         return deduplicatedRecords;
     }
 
+    /// <summary>
+    /// Method used to remove duplicate entries that exist in both the csv file and the existing dataset.
+    /// With large datasets this would not be a good approach.
+    /// We could instead load the data into a seperate table with nonclustered indexes applied
+    /// We could then find any duplicates and remove those before commiting the entire tale
+    /// </summary>
+    /// <param name="records">The current record collection.</param>
     private async Task RemoveDuplicateExistingEntries(CsvParsingResults<MeterReadingRecord> records)
     {
         var inBoundValidReadings = new HashSet<MeterReadingRecord>(records.ValidRecords);
@@ -59,6 +65,12 @@ public class MeterUploadServices(
         }
     }
 
+    /// <summary>
+    /// Method used to remove any invalid accounts that have tried to be passed in
+    /// I would refrain from loading everything into memory for each .csv. Instead I could build a
+    /// cache of accounts before any processing is completed and verify the accounts exists. 
+    /// </summary>
+    /// <param name="records">The current record collection</param>
     private async Task RemoveInvalidAccounts(CsvParsingResults<MeterReadingRecord> records)
     {
         var inBoundValidAccountIds = new HashSet<int>(records.ValidRecords.Select(record => record.AccountId));
@@ -73,13 +85,12 @@ public class MeterUploadServices(
         
         var recordsToRemove = records.ValidRecords
             .Where(record => missingAccountIds.Contains(record.AccountId))
-            .ToList(); // Gather all records to be removed
+            .ToList(); 
 
         foreach (var record in recordsToRemove)
         {
             records.InvalidRecords.Add($"{record} - Invalid account number");
             records.ValidRecords.Remove(record);
         }
-       
     }
 }

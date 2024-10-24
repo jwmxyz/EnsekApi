@@ -1,4 +1,3 @@
-using System.Diagnostics.Metrics;
 
 namespace Ensek.DataAccess.DbModels;
 

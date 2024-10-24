@@ -12,7 +12,7 @@ public class MeterReadingRecord
     {
         return $"{AccountId}, {ReadingDateTime:dd/MM/yyyy HH:mm}, {ReadingValue}";
     }
-    
+
     public override bool Equals(object obj)
     {
         if (obj is MeterReading other)
@@ -20,12 +20,14 @@ public class MeterReadingRecord
             return AccountId == other.AccountId && ReadingDateTime == other.ReadingDateTime &&
                    ReadingValue == other.ReadingValue;
         }
+
         if (obj is MeterReadingRecord mrr)
         {
             return AccountId == mrr.AccountId &&
                    ReadingDateTime == mrr.ReadingDateTime &&
                    ReadingValue == mrr.ReadingValue;
         }
+
         return false;
     }
 

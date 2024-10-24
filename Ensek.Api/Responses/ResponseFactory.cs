@@ -1,12 +1,13 @@
-using Ensek.Api.Responses;
+using Ensek.Api.Factory;
 using Ensek.ErrorManagement.Exceptions;
 using Ensek.Services.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Ensek.Api.Factory;
+namespace Ensek.Api.Responses;
 
 public class ResponseFactory : IResponseFactory
 {
+    /// <see cref="IResponseFactory.CreateResponse{T}(CsvParsingResults{T})"/>
     public IActionResult CreateResponse<T>(CsvParsingResults<T> results)
     {
         if (results.InvalidRecords.Count > 0 && results.ValidRecords.Count == 0)
@@ -22,6 +23,7 @@ public class ResponseFactory : IResponseFactory
         return CreateOkResponse(results);
     }
 
+    /// <see cref="IResponseFactory.CreateResponse{T}({T})"/>
     public IActionResult CreateResponse<T>(T exception) where T : Exception
     {
         return exception switch

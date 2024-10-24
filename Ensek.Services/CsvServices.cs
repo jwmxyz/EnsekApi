@@ -7,12 +7,6 @@ namespace Ensek.Services;
 
 public class CsvServices : ICsvServices
 {
-    // private readonly ICdrErrorManager _cdrErrorManager;
-
-    public CsvServices()
-    {
-        //_cdrErrorManager = cdrErrorManager;
-    }
 
     /// <inheritdoc cref="ICsvServices.Read{T, TK}(Stream, bool)" />
     public CsvParsingResults<T> Read<T, TK>(Stream file, bool firstRowIsHeading = true) where TK : ClassMap<T>
@@ -39,6 +33,7 @@ public class CsvServices : ICsvServices
         };
     }
 
+    /// <inheritdoc cref="ICsvServices.Deduplicate{T}(CsvParsingResults{T}, Func{T, object})" />
     public CsvParsingResults<T> Deduplicate<T>(CsvParsingResults<T> results, Func<T, object> keySelector) where T : new()
     {
         var groupedRecords = results.ValidRecords
@@ -54,7 +49,7 @@ public class CsvServices : ICsvServices
         }
 
         results.ValidRecords = groupedRecords
-            .Select(g => g.First())  // Keep first record from each group
+            .Select(g => g.First())  
             .ToList();
 
         return results;

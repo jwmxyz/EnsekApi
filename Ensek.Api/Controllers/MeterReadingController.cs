@@ -10,14 +10,17 @@ namespace Ensek.Api.Controllers;
 [ApiController]
 [Route("[controller]")]
 public class MeterReadingController(
-    ILogger<MeterReadingController> logger,
     IResponseFactory responseFactory,
     IUploadServices<MeterReadingRecord> meterUploadServices,
     IFileValidationService<InvalidCsvException> csvFileValidationService)
     : ControllerBase
 {
-    private readonly ILogger<MeterReadingController> _logger = logger;
 
+    /// <summary>
+    /// API method that will process an incoming .csv file.
+    /// </summary>
+    /// <param name="csv">the incoming .csv file</param>
+    /// <returns>A response based on the outcome</returns>
     [HttpPost]
     [Route("/meter-reading-uploads")]
     public async Task<IActionResult> Upload([Required] IFormFile csv)

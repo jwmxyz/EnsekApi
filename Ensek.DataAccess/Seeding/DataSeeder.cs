@@ -7,6 +7,10 @@ namespace Ensek.DataAccess.Seeding;
 
 public static class DataSeeder
 {
+    /// <summary>
+    /// Used to seed the data 
+    /// </summary>
+    /// <param name="modelBuilder"></param>
     public static void SeedAccounts(ModelBuilder modelBuilder)
     {
         using var reader = new StreamReader($"{AppDomain.CurrentDomain.BaseDirectory}/Seeding/SeedData/AccountSeedData.csv");

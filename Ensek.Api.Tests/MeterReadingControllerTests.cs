@@ -1,14 +1,16 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Moq;
-using NUnit.Framework;
-using Ensek.Api.Controllers;
+﻿using Ensek.Api.Controllers;
 using Ensek.Api.Factory;
 using Ensek.ErrorManagement.Exceptions;
 using Ensek.Services;
 using Ensek.Services.Models;
 using Ensek.Services.Models.DTO;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Moq;
+using NUnit.Framework;
+
+namespace Ensek.Api.Tests;
 
 [TestFixture]
 public class MeterReadingControllerTests
@@ -22,12 +24,11 @@ public class MeterReadingControllerTests
     [SetUp]
     public void Setup()
     {
-        _loggerMock = new Mock<ILogger<MeterReadingController>>();
         _responseFactoryMock = new Mock<IResponseFactory>();
         _meterUploadServicesMock = new Mock<IUploadServices<MeterReadingRecord>>();
         _csvFileValidation = new Mock<IFileValidationService<InvalidCsvException>>();
+        
         _controller = new MeterReadingController(
-            _loggerMock.Object,
             _responseFactoryMock.Object,
             _meterUploadServicesMock.Object,
             _csvFileValidation.Object);

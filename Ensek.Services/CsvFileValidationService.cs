@@ -20,6 +20,7 @@ public class CsvFileValidationService<T> : IFileValidationService<T> where T : E
         ".csv"
     ];
 
+    /// <inheritdoc cref="IFileValidationService{T}.ValidateFile(IFormFile)" />
     public void ValidateFile(IFormFile file)
     {
         if (file == null || file.Length == 0)
