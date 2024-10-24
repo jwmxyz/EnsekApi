@@ -3,6 +3,7 @@
 
 Tech test for Ensek
 
+Loosley based on [Dagable.Api](https://github.com/dagable/Dagable.Api) 
 
 ## Tech
 
@@ -19,8 +20,7 @@ Tech test for Ensek
 - Validates incoming request objects and standardises return object.
 - Masks any exceptions thrown anywhere within the application
 	+ See `Ensek.Api/Pipleine`
-- Controller end points for various routes within application
-	+ See `Postman/Cdr Api.postman_collection` or swagger documentation
+- Controller end points 
 - Holds startup services and middleware registration
 	+ Runs migrations on startup.
 
@@ -42,6 +42,7 @@ Tech test for Ensek
 - Error/Exception handling 
 - This ideally would be a standardised organisation package install via `Nuget` 
 	+ Any specific errors would be loaded and injected
+- This is really just a place holder, error logging etc would run through here. [See example](https://github.com/jwmxyz/DWS_CDR_API/blob/main/src/Cdr.ErrorManagementLibrary/CdrErrorManager.cs)
 	
 ## Getting Started
 
@@ -55,12 +56,13 @@ Tech test for Ensek
 
 - Clone this Repo
 - Set the connection string.
-- Run `dotnet run --project cdr.Api`
-
+- Run `dotnet run`
 - Swagger documentation will be `http://localhost:<port>/swagger/index.html`
 
 ### Improvements/Enhancements
 - Add a useable UI (Sorry)
+- Proper CI/CD
+- Docker support
 - Improved test cases and test coverage (unit/E2E/integration tests)
 - Improve (or even add) Logging integration
 - Improved Swagger documentation/examples inline with OAS
