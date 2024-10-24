@@ -56,6 +56,7 @@ Loosley based on [Dagable.Api](https://github.com/dagable/Dagable.Api)
 
 - Clone this Repo
 - Set the connection string.
+- Navigate to `Ensek.Api`
 - Run `dotnet run`
 - Swagger documentation will be `http://localhost:<port>/swagger/index.html`
 
