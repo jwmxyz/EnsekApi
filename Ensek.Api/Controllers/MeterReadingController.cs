@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using Ensek.Api.Factory;
-using Ensek.DataAccess.DbModels;
 using Ensek.ErrorManagement.Exceptions;
 using Ensek.Services;
+using Ensek.Services.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ensek.Api.Controllers;

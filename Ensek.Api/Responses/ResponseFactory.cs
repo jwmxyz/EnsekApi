@@ -9,11 +9,6 @@ public class ResponseFactory : IResponseFactory
 {
     public IActionResult CreateResponse<T>(CsvParsingResults<T> results)
     {
-        if (results == null)
-        {
-            return CreateBadRequestResponse();
-        }
-
         if (results.InvalidRecords.Count > 0 && results.ValidRecords.Count == 0)
         {
             return CreateBadRequestResponse(results.InvalidRecords);
@@ -44,7 +39,7 @@ public class ResponseFactory : IResponseFactory
         };
     }
 
-    private static IActionResult CreateBadRequestResponse(List<string> errors = null)
+    private static IActionResult CreateBadRequestResponse(IEnumerable<string>? errors = null)
     {
         return new BadRequestObjectResult(new EnsekStandardResult(null, true, errors));
     }

@@ -5,10 +5,10 @@ using Moq;
 using NUnit.Framework;
 using Ensek.Api.Controllers;
 using Ensek.Api.Factory;
-using Ensek.DataAccess.DbModels;
 using Ensek.ErrorManagement.Exceptions;
 using Ensek.Services;
 using Ensek.Services.Models;
+using Ensek.Services.Models.DTO;
 
 [TestFixture]
 public class MeterReadingControllerTests

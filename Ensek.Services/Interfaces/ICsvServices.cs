@@ -1,5 +1,4 @@
 using CsvHelper.Configuration;
-using Ensek.DataAccess.DbModels;
 using Ensek.Services.Models;
 
 namespace Ensek.Services;
@@ -15,11 +14,6 @@ public interface ICsvServices
     /// <returns>A list of parsed objects from the csv</returns>
     CsvParsingResults<T> Read<T, TK>(Stream file, bool firstRowIsHeading = true) where TK : ClassMap<T>;
 
-    /// <summary>
-    /// A simple method to remove duplicate data from the call records and update the errors array
-    /// </summary>
-    /// <param name="results">the results we want to check</param>
-    /// <returns>the update reuslts object</returns>
-    CsvParsingResults<MeterReadingRecord> DeduplicateCallReferences(CsvParsingResults<MeterReadingRecord> results);
+    CsvParsingResults<T> Deduplicate<T>(CsvParsingResults<T> results, Func<T, object> keySelector) where T : new();
     
 }

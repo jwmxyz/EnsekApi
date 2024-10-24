@@ -27,31 +27,28 @@ public class CsvFileValidationService<T> : IFileValidationService<T> where T : E
             throw Activator.CreateInstance(typeof(T), "Attempted to validate null or empty file") as T;
         }
 
-        // Check file extension
         var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
         if (!ValidCsvExtensions.Contains(extension))
         {
             throw Activator.CreateInstance(typeof(T), "Invalid file extension: {Extension}") as T;
         }
 
-        // Check MIME type
         if (!ValidCsvMimeTypes.Contains(file.ContentType.ToLowerInvariant()))
         {
             throw Activator.CreateInstance(typeof(T), $"Invalid MIME type: {file.ContentType.ToLowerInvariant()}") as T;
         }
 
+        //todo this is specific to csvfiles and should not be part of the generic method.
         try
         {
             using var reader = new StreamReader(file.OpenReadStream());
-            // Read first line to check CSV structure
             var firstLine = reader.ReadLine();
             if (string.IsNullOrWhiteSpace(firstLine))
             {
                 throw Activator.CreateInstance(typeof(T), "Empty first line in CSV file") as T;
             }
 
-            // Basic CSV structure validation
-            var csvPattern = @"^[^,;|""\t\r\n]*(?:,[^,;|""\t\r\n]*)*$";
+            const string csvPattern = @"^[^,;|""\t\r\n]*(?:,[^,;|""\t\r\n]*)*$";
             var isValid = Regex.IsMatch(firstLine, csvPattern);
             if (!isValid)
             {

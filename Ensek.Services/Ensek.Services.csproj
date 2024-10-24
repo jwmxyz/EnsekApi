@@ -11,13 +11,13 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Ensek.DataAccess\Ensek.DataAccess.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
       <Reference Include="Microsoft.AspNetCore.Http.Features">
         <HintPath>..\..\..\..\..\..\usr\local\Cellar\dotnet\8.0.4\libexec\shared\Microsoft.AspNetCore.App\8.0.4\Microsoft.AspNetCore.Http.Features.dll</HintPath>
       </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Ensek.DataAccess\Ensek.DataAccess.csproj" />
     </ItemGroup>
 
 </Project>
