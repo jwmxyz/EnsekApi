@@ -31,7 +31,7 @@ public class CsvFileValidationService<T> : IFileValidationService<T> where T : E
         var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
         if (!ValidCsvExtensions.Contains(extension))
         {
-            throw Activator.CreateInstance(typeof(T), "Invalid file extension: {Extension}") as T;
+            throw Activator.CreateInstance(typeof(T), $"Invalid file extension: {extension}") as T;
         }
 
         if (!ValidCsvMimeTypes.Contains(file.ContentType.ToLowerInvariant()))

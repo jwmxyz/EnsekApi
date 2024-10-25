@@ -19,7 +19,7 @@ Loosley based on [Dagable.Api](https://github.com/dagable/Dagable.Api)
 
 - Validates incoming request objects and standardises return object.
 - Masks any exceptions thrown anywhere within the application
-	+ See `Ensek.Api/Pipleine`
+	+ See `Ensek.Api/Filters`
 - Controller end points 
 - Holds startup services and middleware registration
 	+ Runs migrations on startup.
